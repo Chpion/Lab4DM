@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='ru'>
+	<head>
+		<meta charset="utf-8">             
+        <p class = "main">
+			<h1 align = "center">Лабораторная работа по Дискретной математике №4<br><h2 align = "center">Ориентированный граф<br></h2><h2 align = "center">ИВТАСбд-11<br>Агафонов Владислав</h2></h1>
+        </p>
+		<title>Лабораторная работа №4</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+  
+    <body>           
+		<form id = "id">
+			Введите матрицу:<br>
+			Пример ввода:<br>
+			0 0 3<br>
+			2 0 0<br>
+			0 4 0<br>
+			<textarea id="matrix" cols="30" rows="7" placeholder="Введите матрицу:"></textarea><br>
+			Введите точки:<br>
+			Пример ввода:<br>
+			Начальная точка: 0<br>
+			Конечная точка: 1<br>
+			Начальная точка:<input type='number' placeholder="Начальная точка" id="begin"><br>
+			Конечная точка:<input type='number' placeholder="Конечная точка" id="end"><br>
+			<p><input class="btn btn-success" type="submit" value="Рассчитать"></p><br>
+			<p id = "out"></p>
+		</form>
+    </body>
+	<script>
+		$("#id").submit(function(e) {
+			e.preventDefault();
+			var matrix = $('#matrix').val();
+			var p1 = $('#begin').val();
+			var p2 = $('#end').val();
+			$.ajax({
+				type:"POST",
+				url:"php.php",
+				data:{
+					'matrix':matrix,
+					'p1':p1,
+					'p2':p2
+				},
+				success: function(data) {
+					document.getElementById('out').innerHTML = data;
+				}
+			});
+		});
+	</script>	
+</html>
